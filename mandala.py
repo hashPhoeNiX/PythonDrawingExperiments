@@ -27,5 +27,5 @@ for angle in range(0, maxAngle, angleInc):
     painter.polygon(points, fill=colorBlack if isEven else colorWhite, outline=colorWhite)
     isEven = not isEven
 
-#canvas.save(util.getFilename(__file__))
+#canvas.save(util.get_filename(__file__))
 canvas.show()

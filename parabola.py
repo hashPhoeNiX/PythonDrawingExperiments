@@ -2,7 +2,7 @@ import util
 import math
 from PIL import Image, ImageDraw
 
-def subdivideSegment(startPoint, endPoint, numSubdivisions):
+def subdivide_segment(startPoint, endPoint, numSubdivisions):
     vec = [endPoint[0] - startPoint[0], endPoint[1] - startPoint[1]]
     vec[0] /= numSubdivisions
     vec[1] /= numSubdivisions
@@ -12,7 +12,7 @@ def subdivideSegment(startPoint, endPoint, numSubdivisions):
         points.append(point)
     return points
 
-def drawLines(pointsA, pointsB, painter, color=(255, 255, 255)):
+def draw_lines(pointsA, pointsB, painter, color=(255, 255, 255)):
     numPoints = len(pointsA) if len(pointsA) < len(pointsB) else len(pointsB)
     for i in range(numPoints):
         painter.line([pointsA[i], pointsB[i]], fill=color, width=1)
@@ -25,13 +25,13 @@ painter = ImageDraw.Draw(canvas)
 colorWhite = (255,255,255)
 numSubdivisions = 32
 
-diag = subdivideSegment((2048, 2048), (0, 0), numSubdivisions)
+diag = subdivide_segment((2048, 2048), (0, 0), numSubdivisions)
 
-upEdge = subdivideSegment((0, 0), (2048, 0), numSubdivisions)
-dnEdge = subdivideSegment((0, 2048), (2048, 2048), numSubdivisions)
+upEdge = subdivide_segment((0, 0), (2048, 0), numSubdivisions)
+dnEdge = subdivide_segment((0, 2048), (2048, 2048), numSubdivisions)
 
-drawLines(diag, upEdge, painter, colorWhite)
-drawLines(diag, dnEdge, painter, colorWhite)
+draw_lines(diag, upEdge, painter, colorWhite)
+draw_lines(diag, dnEdge, painter, colorWhite)
 
-canvas.save(util.getFilename(__file__))
+#canvas.save(util.get_filename(__file__))
 canvas.show()
