@@ -13,6 +13,9 @@ end = 21
 
 for j in range(start, end):
     for k in range(j, end):
+        if util.gcd(j, k - 1) != 1:
+            continue
+
         canvas = Image.new('RGBA', imageDimensions, (0, 0, 0, 255))
         painter = ImageDraw.Draw(canvas)
 
@@ -35,5 +38,3 @@ for j in range(start, end):
 
         canvas.save( "out/spirograph_%(ratio1)02d-%(ratio2)02d.png" %
             {"ratio1":ratios[0], "ratio2":ratios[1]} )
-        #canvas.save(util.get_filename(__file__))
-        #canvas.show()
