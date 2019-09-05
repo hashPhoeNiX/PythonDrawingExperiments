@@ -7,17 +7,17 @@ canvas = Image.new('RGBA', imageDimensions, (0, 0, 0, 255))
 
 painter = ImageDraw.Draw(canvas)
 
-colorWhite = (255,255,255)
 center = (imageDimensions[0] / 2, imageDimensions[1] / 2)
 
 radius = 1024
 kNum = 7
 kDen = 13
 kDenReduced = int(kDen / util.gcd(kNum, kDen))
-maxAngleRad = 2 * math.pi * kDenReduced
+maxAngleRad = math.pi * kDenReduced
 numSubdivisions = 180 * kDenReduced
 angleRadInc = maxAngleRad / numSubdivisions
 points = []
+colors = util.color_gradient(numSubdivisions)
 
 for t in range(numSubdivisions):
     angleRad = t * angleRadInc
@@ -26,7 +26,8 @@ for t in range(numSubdivisions):
     y = center[1] + r * math.sin(angleRad)
     points.append((x, y))
 
-painter.line(points, fill=colorWhite, width=1)
+for i in range(numSubdivisions - 1):
+    painter.line([points[i], points[i+1]], fill=colors[i], width=2)
 
-#canvas.save(util.get_filename(__file__))
+#canvas.save("out/" + util.get_filename(__file__))
 canvas.show()
