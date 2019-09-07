@@ -10,11 +10,11 @@ painter = ImageDraw.Draw(canvas)
 center = (imageDimensions[0] / 2, imageDimensions[1] / 2)
 
 points = []
-amp = [480, 480, 270, 270]
-dampFactor = [.000006, .00001, 0.00001, 0.00001]
-freq = [.099, .298, .0995, .3]
-phaseDeg = [0, 0, 45, 60]
-minThreshold = 0.5
+amp = [350, 350, 350, 350]
+dampFactor = [.0000081, .000001, .000008, .000001]
+freq = [.091, .0001, .095, .001]
+phaseDeg = [0, 0, 30, 0]
+minThreshold = 0.09
 
 t = 0
 while True:
