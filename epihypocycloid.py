@@ -9,21 +9,23 @@ painter = ImageDraw.Draw(canvas)
 
 center = (imageDimensions[0] / 2, imageDimensions[1] / 2)
 
-radius = 270
-kNum = 3
-kDen = 1
-kDenReduced = int(kDen / util.gcd(kNum, kDen))
-maxAngleRad = math.pi * kDenReduced
-numSubdivisions = 360 * kDenReduced
+radius = [400, -110]
+h = radius[1] - 30
+rho = int( math.fabs(radius[1]) / math.gcd( int( math.fabs(radius[0]) ), int( math.fabs(radius[1]) ) ) )
+maxAngleRad = 2 * math.pi * rho
+numSubdivisions = 360 * rho
 angleRadInc = maxAngleRad / numSubdivisions
 points = []
 colors = util.color_gradient(numSubdivisions)
 
 for t in range(numSubdivisions + 1):
     angleRad = t * angleRadInc
-    r = radius * math.cos(kNum / kDen * angleRad)
-    x = center[0] + r * math.cos(angleRad)
-    y = center[1] + r * math.sin(angleRad)
+    x = center[0]
+    y = center[1]
+    x += (radius[0] + radius[1]) * math.cos(angleRad)
+    y += (radius[0] + radius[1]) * math.sin(angleRad)
+    x += h * math.cos((radius[0] + radius[1]) / radius[1] * angleRad)
+    y += h * math.sin((radius[0] + radius[1]) / radius[1] * angleRad)
     points.append((x, y))
 
 print("Number of points: %d" % len(points))
